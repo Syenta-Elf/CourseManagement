@@ -1,18 +1,42 @@
-package org.example;
+package org.example.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.*;
 
-public class Student {
+import javax.persistence.*;
 
-    private String id;
+@Entity
+@Table(name = "STUDENT")
+public class Student implements Serializable {
+    @SequenceGenerator(name = "student",
+            sequenceName = "STUDENT_ID_SEQ")
+    @Id
+    @GeneratedValue(generator = "student",
+            strategy = GenerationType.SEQUENCE)
+    @Column(name = "ID")
+    private Long id;
+
+    @Column(name="NAME",length = 25)
     private String name;
+    @Column(name="SURNAME",length = 25)
     private String surname;
+    @Column(name = "GENDER",length = 10)
     private String gender;
+    @Column(name="ADDRESS",length = 100)
     private String address;
+    @Column(name="BIRTHDAY")
     private LocalDate birthday;
 
-    public Student(String id, String name, String surname, String gender, String address, LocalDate birthday) {
-        this.id = id;
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            targetEntity = Student.class
+    )
+    private List<Course> studentCourses;
+
+
+    public Student(String name, String surname, String gender, String address, LocalDate birthday) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -63,13 +87,6 @@ public class Student {
         this.birthday = birthday;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
@@ -95,11 +112,8 @@ public class Student {
             return false;
         Student other = (Student) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+            return other.id == null;
+        } else return id.equals(other.id);
     }
 
 }
