@@ -1,13 +1,20 @@
-package org.example.model;
+package org.example.models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
+@Entity
 public class PermanentInstructor extends Instructor {
     @Column(name="SALARY")
     private double salary;
 
     public PermanentInstructor(String instractorName, String instractorAddress, String telephoneNumber) {
         super(instractorName, instractorAddress, telephoneNumber);
+    }
+
+    public PermanentInstructor() {
     }
 
     public double getSalary() {

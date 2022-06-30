@@ -21,11 +21,13 @@
 
         <property name="hbm2ddl.auto">update</property>
 
-        <property name="showsql">true</property>
+        <property name="show_sql">true</property>
         <!--<mapping class="domain.Pojo" ></mapping>-->
-        <mapping class="org.example.model.Course"/>
-        <mapping class="org.example.model.Instructor"/>
-        <mapping class="org.example.model.Student"/>
+        <mapping class="org.example.models.Course"/>
+        <mapping class="org.example.models.Instructor"/>
+        <mapping class="org.example.models.Student"/>
+        <mapping class="org.example.models.PermanentInstructor"/>
+        <mapping class="org.example.models.VisitingResearcher"/>
 
     </session-factory>
 

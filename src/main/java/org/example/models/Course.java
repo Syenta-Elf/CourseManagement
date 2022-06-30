@@ -1,20 +1,25 @@
-package org.example.model;
+package org.example.models;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "COURSE")
 public class Course  implements Serializable {
+
     @SequenceGenerator(name = "course",
             sequenceName = "COURSE_ID_SEQ")
     @Id
     @GeneratedValue(generator = "course",
             strategy = GenerationType.SEQUENCE)
+    private Long id;
+
     @Column(name = "COURSE_CODE")
-    private Long courseCode;
+    private String courseCode;
+    @Column(name = "COURSE_NAME")
     private String courseName;
 
     @ManyToMany
@@ -24,7 +29,7 @@ public class Course  implements Serializable {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    @JoinColumn(name= "wtf")
+    @JoinColumn(name= "INSTRUCTOR",nullable = false)
     private Instructor instructor;
     private int creditPoint;
     public Course() {
@@ -55,16 +60,24 @@ public class Course  implements Serializable {
         return courseStudents;
     }
 
-    public void setInstractor(Instructor instructor) {
-        this.instructor = instructor;
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    public Instructor getInstractor() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public Instructor getInstructor() {
         return instructor;
     }
 
-    public Long getCourseCode() {
-        return courseCode;
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     @Override
@@ -94,10 +107,15 @@ public class Course  implements Serializable {
 
     @Override
     public String toString() {
-        return "Course [courseCode=" + courseCode + ", courseName=" + courseName + ", creditPoint=" + creditPoint
-                +"]";
+        return "Course{" +
+                "id=" + id +
+                ", courseCode='" + courseCode + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", courseStudents=" + courseStudents +
+                ", instructor=" + instructor +
+                ", creditPoint=" + creditPoint +
+                '}';
     }
-
 }
 
 

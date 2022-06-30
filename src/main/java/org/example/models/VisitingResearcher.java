@@ -1,15 +1,21 @@
-package org.example.model;
+package org.example.models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "VisitingResesearcher")
 public class VisitingResearcher extends Instructor {
 
     @Column(name = "HOUR")
     private int hour;
 
+    public VisitingResearcher() {
+    }
 
     public VisitingResearcher(String instractorName, String instractorAddress, String telephoneNumber,
-            int hour) {
+                              int hour) {
         super(instractorName, instractorAddress, telephoneNumber);
         this.hour = hour;
     }

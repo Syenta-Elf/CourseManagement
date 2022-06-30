@@ -1,11 +1,12 @@
-package org.example.model;
+package org.example.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "INSTRUCTOR")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Instructor  implements Serializable {
 
     @SequenceGenerator(name = "instructor",
@@ -22,7 +23,10 @@ public abstract class Instructor  implements Serializable {
     private String instructorAddress;
     @Column(name = "PHONE",length = 11)// 0555 555 55 55 --> 05555555555
     private String telephoneNumber;
-    @OneToMany(mappedBy = "instructor",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "instructor",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private List<Course> instructorCourses;
 
     public Instructor(String instructorName, String instructorAddress, String telephoneNumber) {
