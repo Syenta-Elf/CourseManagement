@@ -1,12 +1,13 @@
 package org.example;
 
+import org.example.controller.StudentController;
 import org.example.hibernate.HibernateUtil;
-import org.example.models.Course;
-import org.example.models.Instructor;
-import org.example.models.PermanentInstructor;
-import org.example.models.VisitingResearcher;
+import org.example.models.*;
+import org.example.service.StudentService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.util.List;
 
 /**
  * Main
@@ -37,6 +38,12 @@ public class Main {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
+        StudentController studentController = new StudentController();
+        List<Student> studentList = studentController.findAllStudents();
+
+        for (Student s:studentList) {
+            System.out.println("---------------"+s.getName());
+        }
 
         //session.save(course);
         session.save(permanentInstructor);

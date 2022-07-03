@@ -9,8 +9,8 @@
         <module name="homeworks-Syenta-Elf" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="homeworks-Syenta-Elf" target="18" />
+    <bytecodeTargetLevel target="8">
+      <module name="homeworks-Syenta-Elf" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

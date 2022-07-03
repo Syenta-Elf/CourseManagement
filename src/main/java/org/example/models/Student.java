@@ -87,6 +87,21 @@ public class Student implements Serializable {
         this.birthday = birthday;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Course> getStudentCourses() {
+        return studentCourses;
+    }
+
+    public void setStudentCourses(List<Course> studentCourses) {
+        this.studentCourses = studentCourses;
+    }
 
     @Override
     public String toString() {
